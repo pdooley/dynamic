@@ -11,10 +11,11 @@
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2017", "dom"],
-      "@vsolv/ui-kit/table": ["libs/common/ui-kit/table/src/index.ts"],
-    "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@vsolv/ui-kit/table": ["libs/common/ui-kit/table/src/index.ts"],
+    },
+    "skipDefaultLibCheck": true,
   },
   "exclude": ["node_modules", "tmp"]
 }
