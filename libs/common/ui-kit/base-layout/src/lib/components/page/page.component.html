@@ -1,0 +1,10 @@
+<div class="page-header">
+  <ui-crumbs *ngIf="header.crumbs.length" [links]="header.crumbs"></ui-crumbs>
+  <h1>{{ header.title }}</h1>
+  <p *ngIf="header.subtitle">{{ header.subtitle }}</p>
+</div>
+<div class="content-container">
+  <div class="content-padding"><ng-content></ng-content></div>
+  <ng-content select="[slot='no-padding']"></ng-content>
+  <router-outlet></router-outlet>
+</div>

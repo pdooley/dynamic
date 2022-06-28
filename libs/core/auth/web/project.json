@@ -1,0 +1,23 @@
+{
+  "prefix": "vsolv",
+  "projectType": "library",
+  "root": "libs/core/auth/web",
+  "sourceRoot": "libs/core/auth/web/src",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core/auth/web/src/**/*.ts", "libs/core/auth/web/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/core/auth/web/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/core/auth/web"]
+    }
+  }
+}

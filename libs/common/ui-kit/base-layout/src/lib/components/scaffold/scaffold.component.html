@@ -1,0 +1,17 @@
+<ui-toolbar class="main-header">
+  <ng-content select="[slot='header-start']"></ng-content>
+  <h1 class="title">{{ header?.title }}</h1>
+  <ng-content select="[slot='header-end']"></ng-content>
+</ui-toolbar>
+<mat-divider></mat-divider>
+<ui-responsive-sidenav class="main-content" [opened]="navOpened" (openedChange)="navOpenedChange.next($event)">
+  <ng-container slot="side">
+    <ng-content select="[slot='sidenav']"></ng-content>
+  </ng-container>
+  <ng-content></ng-content>
+</ui-responsive-sidenav>
+<mat-divider></mat-divider>
+<ui-toolbar class="main-footer">
+  <ng-content select="[slot='footer-start']"></ng-content>
+  <ng-content select="[slot='footer-end']"></ng-content>
+</ui-toolbar>

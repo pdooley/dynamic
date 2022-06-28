@@ -1,0 +1,23 @@
+{
+  "prefix": "vsolv",
+  "projectType": "library",
+  "root": "libs/core/vsolv-core/web",
+  "sourceRoot": "libs/core/vsolv-core/web/src",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core/vsolv-core/web/src/**/*.ts", "libs/core/vsolv-core/web/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/core/vsolv-core/web/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/core/vsolv-core/web"]
+    }
+  }
+}

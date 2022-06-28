@@ -1,0 +1,23 @@
+{
+  "prefix": "vsolv",
+  "projectType": "library",
+  "root": "libs/core/downtime/web",
+  "sourceRoot": "libs/core/downtime/web/src",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core/downtime/web/src/**/*.ts", "libs/core/downtime/web/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/core/downtime/web/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/core/downtime/web"]
+    }
+  }
+}

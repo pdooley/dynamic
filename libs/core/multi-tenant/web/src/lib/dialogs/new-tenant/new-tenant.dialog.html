@@ -1,0 +1,7 @@
+<form [formGroup]="form">
+  <mat-form-field floatLabel="always" appearance="standard">
+    <mat-label>Tenant Name</mat-label>
+    <input matInput formControlName="name" placeholder="Name of tenant" />
+  </mat-form-field>
+</form>
+<button mat-flat-button (click)="submit()">Submit</button>

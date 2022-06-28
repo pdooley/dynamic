@@ -1,0 +1,95 @@
+<mat-accordion #accordion="matAccordion" [class]="color ? 'theme-' + color : null">
+  <mat-expansion-panel
+    #panel
+    *vsLet="activeLink$ | async as active"
+    [class.collapsed]="collapsed"
+    [hideToggle]="collapsed"
+    (afterExpand)="opened = true"
+    (closed)="opened = false"
+  >
+    <mat-expansion-panel-header
+      matRipple
+      [class]="active?.color || color ? 'theme-' + (active?.color || color) : null"
+      [matRippleDisabled]="links.length === 1"
+      [routerLink]="active?.routerLink"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      [matTooltip]="collapsed ? active?.label + (active?.description ? ' | ' + active?.description : '') || '' : ''"
+      [matTooltipShowDelay]="collapsed ? 0 : 500"
+      matTooltipPosition="right"
+    >
+      <mat-panel-title>
+        <div class="avatar"></div>
+        <div class="info">
+          <h4>{{ active?.label }}</h4>
+          <p *ngIf="active?.description">
+            <small>{{ active?.description }}</small>
+          </p>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div
+      *ngFor="let link of links | diff: [active]; let first = first; let last = last"
+      cdkOverlayOrigin
+      #linkContainer="cdkOverlayOrigin"
+    >
+      <ng-template
+        #childLink
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="linkContainer"
+        [cdkConnectedOverlayOpen]="collapsed && opened"
+        [cdkConnectedOverlayOffsetY]="-50"
+        [cdkConnectedOverlayPush]="false"
+        [cdkConnectedOverlayLockPosition]="true"
+        cdkConnectedOverlayPanelClass="menu-link-picker-button-overlay"
+      >
+        <a
+          @fadeIn
+          [class]="link.color || color ? 'theme-' + (link.color || color) : null"
+          [class.first]="first"
+          [class.last]="last"
+          mat-stroked-button
+          [routerLink]="link.routerLink"
+          routerLinkActive="active"
+          (click)="panel.close()"
+        >
+          <div class="avatar"></div>
+          <div class="info">
+            <h4>{{ link?.label }}</h4>
+            <p *ngIf="link?.description">
+              <small>{{ link?.description }}</small>
+            </p>
+          </div>
+          <mat-icon class="chevron">swap_horiz</mat-icon>
+        </a>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="childLink"></ng-container>
+    </div>
+    <ng-content></ng-content>
+    <div class="browse-other" cdkOverlayOrigin #otherContainer="cdkOverlayOrigin">
+      <ng-template
+        #browseOther
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="otherContainer"
+        [cdkConnectedOverlayOpen]="collapsed && opened"
+        [cdkConnectedOverlayOffsetY]="-36"
+        [cdkConnectedOverlayPush]="false"
+        [cdkConnectedOverlayLockPosition]="true"
+        cdkConnectedOverlayPanelClass="menu-link-picker-button-overlay"
+      >
+        <a
+          @fadeIn
+          class="browse-other-btn"
+          [class]="color ? 'theme-' + color : null"
+          mat-stroked-button
+          (click)="panel.close()"
+        >
+          <mat-icon>{{ actionIcon }}</mat-icon>
+          <span>{{ actionCTA }}</span>
+        </a>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="browseOther"></ng-container>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,209 @@
+:host {
+  display: block;
+  overflow-x: hidden;
+  &.highlight ::ng-deep .mat-table tr.mat-row:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.04);
+    .mat-table-sticky {
+      background: none;
+    }
+  }
+
+  &.compact {
+    .mat-header-row {
+      height: 32px;
+    }
+    .mat-row {
+      height: 32px;
+      .mat-cell .cell-content {
+        .icon-col {
+          width: 18px;
+          height: 18px;
+          font-size: 18px;
+        }
+      }
+    }
+
+    .mat-header-cell,
+    .mat-cell {
+      &:first-of-type {
+        padding-left: 16px;
+        width: 0;
+      }
+      &:last-of-type {
+        padding-right: 16px;
+      }
+
+      &.actions {
+        .mat-icon-button {
+          width: 24px;
+          height: 24px;
+          line-height: 24px;
+
+          .mat-icon {
+            height: 16px;
+            width: 16px;
+            font-size: 16px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.full-width-table {
+  width: 100%;
+  overflow-x: auto;
+  .mat-table {
+    width: 100%;
+  }
+}
+
+.mat-header-row {
+  height: 48px;
+}
+
+.mat-row {
+  transform: scale(1);
+  .ripple-overlay {
+    /* The overlay does not receive pointer-events. Users should still
+    be able to select text; click buttons in cells etc.*/
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+
+  &:hover {
+    .mat-cell {
+      &.actions {
+        .mat-icon-button {
+          opacity: 1;
+        }
+      }
+
+      .cell-content {
+        &.hover-only {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.mat-header-cell,
+.mat-cell {
+  &:first-of-type {
+    padding-left: 32px;
+    width: 0;
+  }
+  &:last-of-type {
+    padding-right: 32px;
+  }
+  &:not(:last-of-type) {
+    padding-right: 16px;
+  }
+
+  &.actions {
+    width: 0;
+    .actions-container {
+      display: flex;
+      gap: 4px;
+    }
+    .mat-icon-button {
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+
+      opacity: 0;
+
+      border: 1px solid rgba(0, 0, 0, 0.12);
+
+      .mat-icon {
+        height: 20px;
+        width: 20px;
+        font-size: 20px;
+        line-height: 20px;
+        margin-top: -2px;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        border-radius: 50%;
+        background: var(--background-color, white);
+      }
+    }
+  }
+
+  .cell-content {
+    display: flex;
+    align-items: center;
+    &.copyable {
+      cursor: copy;
+    }
+
+    .icon-col {
+      width: 24px;
+      height: 24px;
+      font-size: 24px;
+    }
+
+    &.hover-only {
+      opacity: 0;
+    }
+
+    .icon-button-col {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+
+      .mat-icon {
+        height: 18px;
+        width: 18px;
+        font-size: 18px;
+        line-height: 18px;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        border-radius: 50%;
+        background: var(--background-color, white);
+      }
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    ::ng-deep .mat-chip-list-wrapper {
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+.mat-paginator {
+  &::ng-deep {
+    .mat-paginator-container {
+      padding-right: 32px;
+    }
+    .mat-paginator-navigation-next {
+      margin-right: -8px;
+    }
+  }
+}

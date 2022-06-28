@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "../../../../dist/out-tsc",
+    "declaration": true,
+    "types": []
+  },
+  "exclude": ["**/*.spec.ts"],
+  "extends": "./tsconfig.json",
+  "include": [
+    "**/*.ts",
+    "../domain/src/lib/email/mail-send.dto.ts",
+    "../domain/src/lib/email/mail-template.dto.ts",
+    "../domain/src/lib/email/mail-event.dto.ts"
+  ]
+}

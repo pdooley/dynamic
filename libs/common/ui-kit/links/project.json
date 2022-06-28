@@ -1,0 +1,23 @@
+{
+  "prefix": "ui",
+  "projectType": "library",
+  "root": "libs/common/ui-kit/links",
+  "sourceRoot": "libs/common/ui-kit/links/src",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/common/ui-kit/links/src/**/*.ts", "libs/common/ui-kit/links/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/common/ui-kit/links/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/common/ui-kit/links"]
+    }
+  }
+}

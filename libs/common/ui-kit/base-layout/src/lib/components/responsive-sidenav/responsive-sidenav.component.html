@@ -1,0 +1,13 @@
+<mat-drawer-container autosize>
+  <mat-drawer
+    #drawer
+    [mode]="(mode$ | async) || 'over'"
+    [opened]="(mode$ | async) === 'side' || opened"
+    (openedChange)="openedChange.next($event)"
+  >
+    <ng-content select="[slot='side']"></ng-content>
+  </mat-drawer>
+  <mat-drawer-content>
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

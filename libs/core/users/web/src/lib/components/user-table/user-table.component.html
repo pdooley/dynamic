@@ -1,0 +1,3 @@
+<ng-container *vsLet="dataSource$ | async as dataSource">
+  <ui-data-table *ngIf="dataSource" [view]="view" [dataSource]="dataSource" [clickableRows]="false"></ui-data-table>
+</ng-container>

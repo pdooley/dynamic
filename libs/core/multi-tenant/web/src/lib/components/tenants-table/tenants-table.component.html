@@ -1,0 +1,7 @@
+<ng-container *vsLet="dataSource$ | async as dataSource">
+  <div style="display: flex; flex-direction: row">
+    <div style="width: 100%"></div>
+    <button mat-flat-button color="warn" style="margin-right: 16px" (click)="create()">New Tenant</button>
+  </div>
+  <ui-data-table *ngIf="dataSource" [view]="view" [dataSource]="dataSource"></ui-data-table>
+</ng-container>

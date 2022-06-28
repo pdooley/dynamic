@@ -1,0 +1,1 @@
+export const SES_CONFIGURATION_SET = Symbol('SES_CONFIGURATION_SET');

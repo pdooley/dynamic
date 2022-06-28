@@ -1,0 +1,99 @@
+<mat-accordion #accordion="matAccordion" [class]="color ? 'theme-' + color : null">
+  <mat-expansion-panel
+    #panel
+    *ngFor="let link of links; let index = index"
+    [class.no-toggle]="!link.children?.length"
+    [class.collapsed]="collapsed"
+    [hideToggle]="!link.children?.length || collapsed"
+    [expanded]="step === index"
+    [disabled]="link.disabled"
+    (opened)="step = index"
+    (closed)="(step === index && (step = null)) || (expanded = false)"
+    (afterExpand)="panel._body.nativeElement?.scrollIntoView({ behavior: 'smooth', block: 'center' }); expanded = true"
+  >
+    <mat-expansion-panel-header
+      matRipple
+      [matRippleDisabled]="link.disabled || false"
+      [class]="link.color || color ? 'theme-' + link.color : null"
+      [class.disabled]="link.disabled"
+      [class.external-link]="link.external"
+      [routerLink]="link.external ? null : link.routerLink"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      [class.child-active]="(link.children | pluck: 'routerLink' | intersection: [activeUrl$ | async])?.length"
+      [matTooltip]="collapsed ? link.label + (link.tooltip ? ' | ' + link.tooltip : '') : link.tooltip || ''"
+      [matTooltipShowDelay]="collapsed ? 0 : 500"
+      matTooltipPosition="right"
+      (click)="link.external && navigateExternal(link.routerLink)"
+    >
+      <mat-panel-title>
+        <mat-icon *ngIf="link.icon">{{ link.icon }}</mat-icon>
+        <span>{{ link.label }}</span>
+      </mat-panel-title>
+      <mat-icon class="chevron" [class.external]="link.external" *ngIf="!link.children?.length">{{
+        link.external ? 'open_in_new' : 'chevron_right'
+      }}</mat-icon>
+    </mat-expansion-panel-header>
+    <div
+      #childContainer
+      *ngFor="let child of link.children; let i = index; let first = first; let last = last"
+      cdkOverlayOrigin
+      #trigger="cdkOverlayOrigin"
+    >
+      <ng-template
+        #childLink
+        #childLinkOverlay="cdkConnectedOverlay"
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="collapsed && expanded && step === index"
+        [cdkConnectedOverlayOffsetY]="-38"
+        [cdkConnectedOverlayLockPosition]="true"
+        [cdkConnectedOverlayPush]="true"
+        [cdkConnectedOverlayViewportMargin]="-1000"
+        cdkConnectedOverlayPanelClass="navigation-panel-button-overlay"
+      >
+        <a
+          @fadeIn
+          *ngIf="!child.external; else externalLink"
+          mat-flat-button
+          class="nav-link"
+          [class]="child.color || color ? 'theme-' + (child.color || color) : null"
+          [class.first]="first"
+          [class.last]="last"
+          [disabled]="child.disabled"
+          [routerLink]="child.routerLink"
+          routerLinkActive="active"
+          (click)="collapsed && panel.close()"
+          [matTooltip]="child.tooltip || ''"
+          [matTooltipShowDelay]="500"
+          matTooltipPosition="right"
+        >
+          <mat-icon *ngIf="child.icon">{{ child.icon }}</mat-icon>
+          <span>{{ child.label }}</span>
+          <mat-icon class="chevron">chevron_right</mat-icon>
+        </a>
+        <ng-template #externalLink>
+          <a
+            @fadeIn
+            mat-flat-button
+            class="nav-link"
+            [class]="child.color || color ? 'theme-' + (child.color || color) : null"
+            [class.first]="first"
+            [class.last]="last"
+            [disabled]="child.disabled"
+            [href]="child.routerLink || '' | safe: 'url'"
+            [target]="'_blank'"
+            [matTooltip]="child.tooltip || ''"
+            [matTooltipShowDelay]="500"
+            matTooltipPosition="right"
+          >
+            <mat-icon *ngIf="child.icon">{{ child.icon }}</mat-icon>
+            <span>{{ child.label }}</span>
+            <mat-icon class="chevron external">open_in_new</mat-icon>
+          </a>
+        </ng-template>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="childLink"></ng-container>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

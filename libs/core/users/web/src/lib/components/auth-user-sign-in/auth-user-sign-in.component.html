@@ -1,0 +1,11 @@
+<h2>Choose a profile!</h2>
+<div *vsLet="lastSignedIn$ | async as lastSignedIn">
+  <small *ngIf="lastSignedIn"
+    >You were last signed in with <i>{{ lastSignedIn.displayName }}</i> on {{ lastSignedIn.timestamp | date }}</small
+  >
+</div>
+<vsolv-user-profiles-table [data]="profiles" (selected)="chooseUser($event)"></vsolv-user-profiles-table>
+<div style="display: flex; flex-direction: row; justify-content: space-evenly">
+  <button mat-flat-button (click)="cancel()">Cancel</button>
+  <button mat-flat-button (click)="createNew()">Create New Profile</button>
+</div>

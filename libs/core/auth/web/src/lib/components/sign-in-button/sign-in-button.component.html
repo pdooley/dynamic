@@ -1,0 +1,6 @@
+<div *vsLet="isSignedIn$ | async as isSignedIn">
+  <button mat-button (click)="!isSignedIn ? signIn() : signOut()" color="{{ !isSignedIn ? 'primary' : 'warn' }}">
+    {{ !isSignedIn ? 'Sign In' : 'Sign Out' }}
+    <mat-icon>{{ !isSignedIn ? 'login' : 'logout' }}</mat-icon>
+  </button>
+</div>

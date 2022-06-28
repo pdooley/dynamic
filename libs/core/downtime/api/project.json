@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/core/downtime/api",
+  "sourceRoot": "libs/core/downtime/api/src",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/core/downtime/api/**/*.ts"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/core/downtime/api/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/core/downtime/api"]
+    }
+  }
+}

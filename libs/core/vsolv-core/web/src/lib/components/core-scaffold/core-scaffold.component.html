@@ -1,0 +1,11 @@
+<ui-scaffold *ngIf="header$ | async as header" [header]="header">
+  <div slot="header-start" style="margin-right: 16px"></div>
+  <div slot="header-end" style="width: 100%"></div>
+  <vsolv-user-name slot="header-end" [user]="(currentUser$ | async) || undefined"></vsolv-user-name>
+  <vsolv-sign-in-button slot="header-end"></vsolv-sign-in-button>
+  <!-- TODO: ROUTING -->
+
+  <h3 style="margin-left: 16px">Users</h3>
+  <vsolv-user-table></vsolv-user-table>
+  <vsolv-counter></vsolv-counter>
+</ui-scaffold>

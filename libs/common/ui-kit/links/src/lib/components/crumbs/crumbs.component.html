@@ -1,0 +1,13 @@
+<ng-container *ngFor="let link of links; let last = last">
+  <a
+    mat-flat-button
+    [routerLink]="link.routerLink"
+    [disabled]="link.disabled"
+    [matTooltip]="link.tooltip || ''"
+    [matTooltipShowDelay]="500"
+  >
+    <mat-icon *ngIf="link.icon">{{ link.icon }}</mat-icon>
+    {{ link.label }}
+  </a>
+  <span *ngIf="!last">/</span>
+</ng-container>
