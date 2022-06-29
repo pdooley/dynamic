@@ -14,8 +14,9 @@
     "baseUrl": ".",
     "paths": {
       "@vsolv/ui-kit/table": ["libs/common/ui-kit/table/src/index.ts"],
+      "@vsolv/ui-kit/utils": ["libs/common/ui-kit/utils/src/index.ts"]
     },
-    "skipDefaultLibCheck": true,
+    "skipDefaultLibCheck": true
   },
   "exclude": ["node_modules", "tmp"]
 }
